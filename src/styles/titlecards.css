@@ -1,0 +1,49 @@
+.text-hold{
+    position: absolute;
+    background-color: #049D04;
+    color: white;
+    left: 10px;
+    bottom: 15px;
+    border-radius: 3px;
+    font-weight: 500;
+    padding-left: .8%;
+    padding-right: .8%;
+}
+
+.Title-Card img{
+    max-width: 100%;
+    border-radius: 7px;
+}
+
+.upper-half{
+        display: inline-block;
+        position: relative;
+}
+
+.concertdate{
+    font-size:20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #9D38C3;
+
+}
+
+.bottom-half{
+    padding-left: 10px;
+    inline-size: 400px; 
+}
+
+.location{
+    color: #727272;
+}
+
+.Title-Card {
+    padding: 20px;
+    margin-right: 1000px;
+    margin-left: 70px;
+}
+
+.Title-Card:hover{
+    background-color: rebeccapurple;
+}
