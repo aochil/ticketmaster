@@ -36,12 +36,16 @@ function App() {
     <div data-testid="app">
       <h1>Ticketmaster</h1>
       <Input id="search" icon="search" placeholder="Search..." />
-      <Button
+      <button
+        type="button"
+        class="btn btn-primary"
         onClick={() => {
           getSearchValue();
           getEvents();
         }}
-      />
+      >
+        Search
+      </button>
     </div>
   );
 }
