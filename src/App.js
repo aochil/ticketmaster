@@ -8,10 +8,11 @@ function App() {
   let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${TM_KEY}&keyword=`;
 
   const getSearchValue = () => {
-    let searchValue = document.getElementById("search").value;
-    console.log(searchValue);
+    let searchValue = document.getElementById("search");
+    let updatedSearch = searchValue.value.replace(/\s/g, ","); //replace space between words with a comma
+    console.log(updatedSearch);
 
-    TM_API += searchValue;
+    TM_API += updatedSearch;
 
     console.log(TM_API);
   };
@@ -21,7 +22,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setEventList(data);
+        setEventList(data); //store data from udpated api url
       })
       .catch((err) => {
         console.log(err);
@@ -38,7 +39,7 @@ function App() {
       <Input id="search" icon="search" placeholder="Search..." />
       <button
         type="button"
-        class="btn btn-primary"
+        className="btn btn-primary"
         onClick={() => {
           getSearchValue();
           getEvents();
