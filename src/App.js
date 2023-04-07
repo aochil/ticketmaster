@@ -4,23 +4,16 @@ import { Button, Input } from "semantic-ui-react";
 const TM_KEY = process.env.REACT_APP_TM_KEY;
 let page = 0;
 
-
 function App() {
   const [eventList, setEventList] = useState([]);
   let [activePage, setActivePage] = useState(0);
-  let [query, setQuery] = useState('pop');
+  let [query, setQuery] = useState("pop");
 
   let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${TM_KEY}&page=${activePage}&keyword=${query}`;
 
-  const getEvents = () => {
-    const searchValue = document
-      .getElementById("search")
-      .value.replace(/\s/g, ","); //replace space between words with a comma
-    setQuery(searchValue);
-    console.log(query)
-
+  useEffect(() => {
     console.log(TM_API);
-     fetch(TM_API)
+    fetch(TM_API)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -29,13 +22,15 @@ function App() {
       .catch((err) => {
         console.log("Error", err);
       });
+  }, [TM_API, activePage, query]);
+
+  const getEvents = () => {
+    const searchValue = document
+      .getElementById("search")
+      .value.replace(/\s/g, ","); //replace space between words with a comma
+    setQuery(searchValue);
+    console.log(query);
   };
-
-  useEffect(() => {
-    getEvents();
-    console.log('here');
-  }, [activePage,query]);
-
   const previousPage = () => {
     if (!page == 0) {
       page--;
@@ -64,7 +59,6 @@ function App() {
         onClick={() => {
           previousPage();
           setActivePage(page);
-          getEvents();
         }}
       />
       <Button
@@ -72,7 +66,6 @@ function App() {
         onClick={() => {
           nextPage();
           setActivePage(page);
-          getEvents();
         }}
       />
     </div>
