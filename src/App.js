@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input } from "semantic-ui-react";
-import axios from "axios";
+
 const TM_KEY = process.env.REACT_APP_TM_KEY;
 let page = 0;
+
+
 function App() {
   const [eventList, setEventList] = useState([]);
   let [activePage, setActivePage] = useState(0);
+  let [query, setQuery] = useState('pop');
 
-  let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${TM_KEY}&page=${activePage}&keyword=`;
+  let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${TM_KEY}&page=${activePage}&keyword=${query}`;
 
-  const getEvents = async () => {
+  const getEvents = () => {
     const searchValue = document
       .getElementById("search")
       .value.replace(/\s/g, ","); //replace space between words with a comma
-    TM_API += searchValue;
+    setQuery(searchValue);
+    console.log(query)
 
     console.log(TM_API);
-    await fetch(TM_API)
+     fetch(TM_API)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -29,8 +33,8 @@ function App() {
 
   useEffect(() => {
     getEvents();
-    setActivePage(page);
-  }, []);
+    console.log('here');
+  }, [activePage,query]);
 
   const previousPage = () => {
     if (!page == 0) {
