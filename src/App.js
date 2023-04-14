@@ -7,45 +7,49 @@ let page = 0;
 function App() {
   const [eventList, setEventList] = useState([]);
   let [activePage, setActivePage] = useState(0);
-  let [query, setQuery] = useState("pop");
+  let [query, setQuery] = useState("");
+  let [searchText, setSearchText] = useState("");
+  let [error, setError] = useState(false);
 
   let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${TM_KEY}&page=${activePage}&keyword=${query}`;
 
+  const getEvents = () => {
+    let updatedSearch = searchText.replace(/[\s,]/g, ","); //replace space between keywords with comma for api
+    setQuery(updatedSearch);
+    setSearchText("");
+    
+  };
   useEffect(() => {
-    console.log(TM_API);
     fetch(TM_API)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setEventList(data); //store data from udpated api url
+        setEventList(data._embedded.events);
       })
       .catch((err) => {
         console.log("Error", err);
+        setError(true);
+        alert('Search not found, please search again',)
       });
-  }, [TM_API, activePage, query]);
+  }, [activePage, query]);
 
-  const getEvents = () => {
-    const searchValue = document
-      .getElementById("search")
-      .value.replace(/\s/g, ","); //replace space between words with a comma
-    setQuery(searchValue);
-    console.log(query);
-  };
   const previousPage = () => {
     if (!page == 0) {
       page--;
     }
   };
   const nextPage = () => {
-    console.log("before", page);
     page++;
-    console.log("after", page);
   };
 
   return (
     <div data-testid="app">
       <h1>Ticketmaster</h1>
-      <Input id="search" icon="search" placeholder="Search..." />
+      <Input
+        id="search"
+        icon="search"
+        placeholder="Search..."
+        onChange={(event) => setSearchText(event.target.value)}
+      />
       <Button
         content="Search"
         className="btn btn-primary"
