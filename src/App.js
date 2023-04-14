@@ -1,4 +1,5 @@
 import React from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -24,6 +25,7 @@ function App() {
               <TicketmasterNavbar />
               <Header/>
               <SearchBar/>
+
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/concerts" element={<Concerts />} />
