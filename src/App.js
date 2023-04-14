@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from "react-router-dom";
 import TicketmasterNavbar from "./TicketmasterNavbar.js";
 import  Concerts  from "./pages/Concerts.js";
 import Sports from "./pages/Sports.js";
@@ -12,32 +12,34 @@ import Sell from "./pages/SellTickets.js"
 import MyListings from "./pages/MyListings.js";
 import GiftCards from "./pages/GiftCards.js";
 import Help from "./pages/Help.js"
-
-
-
-
-
-const router = createBrowserRouter([
-  { path: "/concerts", element: <Concerts /> },
-  { path: "/sports", element: <Sports /> },
-  { path: "/family", element: <Family /> },
-  { path: "/arttheater", element: <Art /> },
-  { path: "/deals", element: <Deals /> },
-  { path: "/entertainment", element: <EntertainmentGuides /> },
-  { path: "/signin", element: <SignIn /> },
-  { path: "/selltickets", element: <Sell /> },
-  { path: "/mylistings", element: <MyListings /> },
-  { path: "/giftcards", element: <GiftCards /> },
-  { path: "/help", element: <Help /> }
-]);
+import Home from "./pages/Home.js";
 
 
 
 function App() {
       return (
           <div>
-            <TicketmasterNavbar />
-            <RouterProvider router= {router} />
+            <BrowserRouter>
+              <TicketmasterNavbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/concerts" element={<Concerts />} />
+                <Route path="/sports" element={<Sports />} />
+                <Route path="/family" element={<Family />} />
+                <Route path="/arttheater" element={<Art />} />
+                <Route path="/deals" element={<Deals />} />
+                <Route path="/entertainment" element={<EntertainmentGuides />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/selltickets" element={<Sell />} />
+                <Route path="/mylistings" element={<MyListings />} />
+                <Route path="/giftcards" element={<GiftCards />} />
+                <Route path="/help" element={<Help />} />
+
+              </Routes>
+            
+            </BrowserRouter>
+
+        
           </div>
       );
 }

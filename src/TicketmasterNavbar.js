@@ -6,28 +6,28 @@ import { Link } from 'react-router-dom';
 function TicketmasterNavbar() {
   return(
     <Navbar bg="dark" variant="dark" sticky="top">
-      <Navbar.Brand to="/">Ticketmaster</Navbar.Brand>
+      <Navbar.Brand to="/home">Ticketmaster</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav" >
         <Nav className="mr-auto">
-          <Nav.Link class="nav-item nav-link ml-5" to="/concerts">Concerts</Nav.Link>
-          <Nav.Link class="nav-item nav-link ml-5" to="/sports">Sports</Nav.Link>
-          <Nav.Link class="nav-item nav-link ml-5"to="/arttheater">Art &amp; Theater</Nav.Link>
-          <Nav.Link class="nav-item nav-link ml-5" to="/family">Family</Nav.Link>
+          <Link className="nav-item nav-link ml-5" to="/concerts">Concerts</Link>
+          <Link className="nav-item nav-link ml-5" to="/sports">Sports</Link>
+          <Link className="nav-item nav-link ml-5"to="/arttheater">Art &amp; Theater</Link>
+          <Link className="nav-item nav-link ml-5" to="/family">Family</Link>
           <NavDropdown title="More" id="basic-nav-dropdown">
-            <NavDropdown.Item to="/deals">Deals</NavDropdown.Item>
-            <NavDropdown.Item to="/entertainment">Entertainment Guides</NavDropdown.Item>
+            <NavDropdown.Item><Link className="nav-item nav-link ml-5 text-dark" to="/deals">Deals</Link></NavDropdown.Item>
+            <NavDropdown.Item><Link className="nav-item nav-link ml-5 text-dark" to="/entertainment">Entertainment Guides</Link></NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Nav>
-            <Nav.Link to="/signin">Sign In</Nav.Link>
+            <Link className="nav-item nav-link ml-5"to="/signin">Sign In</Link>
             <NavDropdown title="Sell" id="basic-nav-dropdown">
-              <NavDropdown.Item to="/selltickets">Sell Tickets</NavDropdown.Item>
-              <NavDropdown.Item to="/mylistings">My Listings</NavDropdown.Item>
+              <NavDropdown.Item><Link className="nav-item nav-link ml-5 text-dark" to="/selltickets">Sell Tickets</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link className="nav-item nav-link ml-5 text-dark" to="/mylistings">My Listings</Link></NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link to="/giftcards">Gift Cards</Nav.Link>
-            <Nav.Link to="/help">Help</Nav.Link>
+            <Link className="nav-item nav-link ml-5" to="/giftcards">Gift Cards</Link>
+            <Link className="nav-item nav-link ml-5" to="/help">Help</Link>
           </Nav>
           </Navbar.Collapse>
       </Navbar.Collapse>
