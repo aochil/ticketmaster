@@ -1,18 +1,18 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from "react-router-dom";
-import TicketmasterNavbar from "./TicketmasterNavbar.js";
-import  Concerts  from "./pages/Concerts.js";
-import Sports from "./pages/Sports.js";
-import Family from "./pages/Family.js";
-import Art from "./pages/ArtAndTheater.js";
-import Deals from "./pages/Deals.js";
-import EntertainmentGuides from "./pages/EntertainmentGuides.js";
-import SignIn from "./pages/SignIn.js";
-import Sell from "./pages/SellTickets.js"
-import MyListings from "./pages/MyListings.js";
-import GiftCards from "./pages/GiftCards.js";
-import Help from "./pages/Help.js"
-import Home from "./pages/Home.js";
+import TicketmasterNavbar from "./components/TicketmasterNavbar.js";
+import  Concerts  from "./routes/Concerts.js";
+import Sports from "./routes/Sports.js";
+import Family from "./routes/Family.js";
+import Art from "./routes/ArtAndTheater.js";
+import Deals from "./routes/Deals.js";
+import EntertainmentGuides from "./routes/EntertainmentGuides.js";
+import SignIn from "./routes/SignIn.js";
+import Sell from "./routes/SellTickets.js"
+import MyListings from "./routes/MyListings.js";
+import GiftCards from "./routes/GiftCards.js";
+import Help from "./routes/Help.js"
+import Home from "./routes/Home.js";
 
 
 
