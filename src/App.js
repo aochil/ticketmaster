@@ -1,79 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { Button, Input } from "semantic-ui-react";
-
-const TM_KEY = process.env.REACT_APP_TM_KEY;
-let page = 0;
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import TicketmasterNavbar from "./components/TicketmasterNavbar.js";
+import Concerts from "./routes/Concerts.js";
+import Sports from "./routes/Sports.js";
+import Family from "./routes/Family.js";
+import Art from "./routes/ArtAndTheater.js";
+import Deals from "./routes/Deals.js";
+import EntertainmentGuides from "./routes/EntertainmentGuides.js";
+import SignIn from "./routes/SignIn.js";
+import Sell from "./routes/SellTickets.js"
+import MyListings from "./routes/MyListings.js";
+import GiftCards from "./routes/GiftCards.js";
+import Help from "./routes/Help.js"
+import Home from "./routes/Home.js";
+import { SearchBar } from "./components/SearchBar";
 
 function App() {
-  const [eventList, setEventList] = useState([]);
-  let [activePage, setActivePage] = useState(0);
-  let [query, setQuery] = useState("");
-  let [searchText, setSearchText] = useState("");
-  let [error, setError] = useState(false);
-
-  let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${TM_KEY}&page=${activePage}&keyword=${query}`;
-
-  const getEvents = () => {
-    let updatedSearch = searchText.replace(/[\s,]/g, ","); //replace space between keywords with comma for api
-    setQuery(updatedSearch);
-    setSearchText("");
-    
-  };
-  useEffect(() => {
-    fetch(TM_API)
-      .then((res) => res.json())
-      .then((data) => {
-        setEventList(data._embedded.events);
-      })
-      .catch((err) => {
-        console.log("Error", err);
-        setError(true);
-        alert('Search not found, please search again',)
-      });
-  }, [activePage, query]);
-
-  const previousPage = () => {
-    if (!page == 0) {
-      page--;
-    }
-  };
-  const nextPage = () => {
-    page++;
-  };
-
-  return (
-    <div data-testid="app">
-      <h1>Ticketmaster</h1>
-      <Input
-        id="search"
-        icon="search"
-        placeholder="Search..."
-        onChange={(event) => setSearchText(event.target.value)}
-      />
-      <Button
-        content="Search"
-        className="btn btn-primary"
-        onClick={() => {
-          getEvents();
-        }}
-      />
-
-      <Button
-        content="<"
-        onClick={() => {
-          previousPage();
-          setActivePage(page);
-        }}
-      />
-      <Button
-        content=">"
-        onClick={() => {
-          nextPage();
-          setActivePage(page);
-        }}
-      />
-    </div>
-  );
+      return (
+          <div>
+            <BrowserRouter>
+              <TicketmasterNavbar />
+              <Header/>
+              <SearchBar/>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/concerts" element={<Concerts />} />
+                <Route path="/sports" element={<Sports />} />
+                <Route path="/family" element={<Family />} />
+                <Route path="/arttheater" element={<Art />} />
+                <Route path="/deals" element={<Deals />} />
+                <Route path="/entertainment" element={<EntertainmentGuides />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/selltickets" element={<Sell />} />
+                <Route path="/mylistings" element={<MyListings />} />
+                <Route path="/giftcards" element={<GiftCards />} />
+                <Route path="/help" element={<Help />} />
+              </Routes>
+              <Footer/>
+            </BrowserRouter>
+          </div>
+      );
 }
 
 export { App };
