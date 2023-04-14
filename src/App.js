@@ -1,7 +1,9 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import TicketmasterNavbar from "./components/TicketmasterNavbar.js";
-import  Concerts  from "./routes/Concerts.js";
+import Concerts from "./routes/Concerts.js";
 import Sports from "./routes/Sports.js";
 import Family from "./routes/Family.js";
 import Art from "./routes/ArtAndTheater.js";
@@ -14,13 +16,12 @@ import GiftCards from "./routes/GiftCards.js";
 import Help from "./routes/Help.js"
 import Home from "./routes/Home.js";
 
-
-
 function App() {
       return (
           <div>
             <BrowserRouter>
               <TicketmasterNavbar />
+              <Header/>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/concerts" element={<Concerts />} />
@@ -34,16 +35,11 @@ function App() {
                 <Route path="/mylistings" element={<MyListings />} />
                 <Route path="/giftcards" element={<GiftCards />} />
                 <Route path="/help" element={<Help />} />
-
               </Routes>
-            
+              <Footer/>
             </BrowserRouter>
-
-        
           </div>
       );
 }
 
 export { App };
-
-
