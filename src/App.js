@@ -1,5 +1,6 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import TicketmasterNavbar from "./components/TicketmasterNavbar.js";
@@ -15,6 +16,7 @@ import MyListings from "./routes/MyListings.js";
 import GiftCards from "./routes/GiftCards.js";
 import Help from "./routes/Help.js"
 import Home from "./routes/Home.js";
+import { SearchBar } from "./components/SearchBar";
 
 function App() {
       return (
@@ -22,6 +24,8 @@ function App() {
             <BrowserRouter>
               <TicketmasterNavbar />
               <Header/>
+              <SearchBar/>
+
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/concerts" element={<Concerts />} />
