@@ -1,18 +1,20 @@
 import React from "react";
 import "../styles/titlecards.css"
-function TitleCard(event){
+function TitleCard(props) {
+    const { data } = props;
+
     return (
         <div className="Title-Card">
             <div className="upper-half">
                 <div className="text-hold">
-                    PRESALE: {event.presale}
+                    PRESALE: {data.presale}
                 </div>
-                <img src={event.image_url}/>
+                <img src={data.image_url}/>
             </div>
             <div className="bottom-half">
-                <p className="concertdate">{event.concert_date}</p>
-                <h2>{event.event_name}</h2>
-                <p className="location">{event.location_1} • {event.arena_1}</p>
+                <p className="concertdate">{data.concert_date}</p>
+                <h2>{data.event_name}</h2>
+                <p className="location">{data.location_1} • {data.arena_1}</p>
             </div>
         </div>
     )

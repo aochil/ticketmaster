@@ -13,6 +13,7 @@
 .Title-Card img{
     max-width: 100%;
     border-radius: 7px;
+    
 }
 
 .upper-half{
@@ -42,6 +43,9 @@
     padding: 20px;
     margin-right: 1000px;
     margin-left: 70px;
+    /* display: flex; */
+    overflow: hidden;
+
 }
 
 .Title-Card:hover{
