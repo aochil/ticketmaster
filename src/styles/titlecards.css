@@ -36,18 +36,27 @@
     padding-left: 10px;
     inline-size: 400px; 
 }
-
+ 
 .location{
     color: #727272;
 }
 
 .Title-Card {
     padding: 20px;
-    margin-right: 1000px;
-    margin-left: 50px;
-    /* display: flex; */
-    overflow: hidden;
 
+    /* display: flex; */
+    /* overflow: hidden; */
+
+    /*
+    justify-content: flex-start; 
+    flex-direction: row; */
+
+
+}
+
+.list1 {
+    display: flex;
+    justify-content: center;
 }
 
 .Title-Card:hover{

@@ -1,5 +1,6 @@
 import React from "react";
 import TitleCard from "./TitleCard";
+import "../styles/titlecards.css"
 
 
 function CardList(props) {
@@ -11,7 +12,9 @@ function CardList(props) {
             <div className="list">
                 {
                     dummyData.length > 0 ? 
-                    dummyData.map((events1) => <TitleCard data ={events1}/>)
+                    <div className="list1">
+                            {dummyData.map((events1) => <TitleCard data={events1} />)}
+                    </div>
                         : `There are No Events for this Category ${event}`
 
                 }
