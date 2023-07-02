@@ -1,8 +1,8 @@
 import React from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import TicketmasterNavbar from "./components/TicketmasterNavbar.js";
 import Concerts from "./routes/Concerts.js";
 import Sports from "./routes/Sports.js";
