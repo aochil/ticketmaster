@@ -1,10 +1,14 @@
 import React from "react";
+import { NavLink, Link } from "react-router-dom";
+import { SearchBar } from "./GetEvents";
+const Header = () => {
+  return (
+    <nav>
+      <div>
+        <h1>Header</h1>
+      </div>
+    </nav>
+  );
+};
 
-function Header() {
-    return <header>
-        <div>
-        </div>
-    </header>;
-}
-
-export default { Header };
+export default Header;
