@@ -8,10 +8,10 @@ import moment from "moment";
 let page = 0;
 function GetEvents() {
   const [eventList, setEventList] = useState([]);
-  let [activePage, setActivePage] = useState(0);
-  let [query, setQuery] = useState("Coachella");
-  let [searchText, setSearchText] = useState("");
-  let [error, setError] = useState(false);
+  const [activePage, setActivePage] = useState(0);
+  const [query, setQuery] = useState("Coachella");
+  const [searchText, setSearchText] = useState("");
+  const [error, setError] = useState(false);
 
   let TM_API = `https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.TM_KEY}&page=${activePage}&keyword=${query}`; //used TM Api key from .env file
 
@@ -44,21 +44,24 @@ function GetEvents() {
   };
 
   return (
-    <div data-testid="app">
-      <Input
-        id="search"
-        icon="search"
-        placeholder="Search..."
-        onChange={(event) => setSearchText(event.target.value)}
-      />
-      <Button
-        content="Search"
-        className="btn btn-primary"
-        onClick={() => {
-          getEvents();
-        }}
-      />
-      <Container id="eventContainer">
+    <div id="main">
+      <div id="wrapper">
+        <Input
+          id="search"
+          placeholder="Search..."
+          onChange={(event) => setSearchText(event.target.value)}
+        />
+        <Button
+          id="searchBtn"
+          content="Search"
+          className="btn btn-outline-primary"
+          onClick={() => {
+            getEvents();
+          }}
+        />
+      </div>
+
+      <Container id="container">
         {console.log(eventList)}
 
         {eventList.map((eachEvent) => {
@@ -74,8 +77,11 @@ function GetEvents() {
           });
 
           const date = eachEvent.dates.start.dateTime;
-          const formatDate = moment(date).format("MMMM Do, YYYY");
+          const formatDate = moment(date).format("MMMM Do, YYYY"); //used moment to format date
           const formatTime = moment(date).format("h:mm A");
+          const venueName = eachEvent._embedded.venues[0].name;
+          const city = eachEvent._embedded.venues[0].city.name;
+          const state = eachEvent._embedded.venues[0].state.stateCode;
 
           return (
             <div className="card" style={{ width: 18 + "rem" }}>
@@ -86,18 +92,21 @@ function GetEvents() {
               />
               <div className="card-body">
                 <h5 className="card-title">{eachEvent.name}</h5>
-                <p class="card-text">{eachEvent._embedded.venues[0].name}</p>
+                <p className="card-text">{city + ", " + state}</p>
               </div>
               <ul className="list-group list-group-flush">
+                <li className="list-group-item">{venueName}</li>
                 <li className="list-group-item">
                   {formatDate + " at " + formatTime}
                 </li>
-                <li className="list-group-item">
-                  {"Tickets starting at $" + eachEvent.priceRanges[0].min}
-                </li>
               </ul>
               <div className="card-body">
-                <a href={eachEvent.url} className="card-link" target="_blank">
+                <a
+                  href={eachEvent.url}
+                  className="btn btn-info"
+                  role="button"
+                  target="_blank"
+                >
                   {/* target blank to open ticket link in new tab*/}
                   View Tickets
                 </a>
@@ -111,20 +120,24 @@ function GetEvents() {
           );
         })}
       </Container>
-      <Button
-        content="<"
-        onClick={() => {
-          previousPage();
-          setActivePage(page);
-        }}
-      />
-      <Button
-        content=">"
-        onClick={() => {
-          nextPage();
-          setActivePage(page);
-        }}
-      />
+      <div id="pageBtns">
+        <Button
+          className="btn btn-outline-primary"
+          content="Back"
+          onClick={() => {
+            previousPage();
+            setActivePage(page);
+          }}
+        />
+        <Button
+          className="btn btn-outline-primary"
+          content="Next"
+          onClick={() => {
+            nextPage();
+            setActivePage(page);
+          }}
+        />
+      </div>
     </div>
   );
 }

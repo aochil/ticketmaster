@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
     return <footer>
-        <div className="row">
+        <div className="row bg-dark">
             <div className="col-6 col-md">
                 <h5>Helpful Links</h5>
                 <ul>
@@ -22,10 +22,10 @@ function Footer() {
                     <li><a className="" href="#">House of Blues</a></li>
                     <li><a className="" href="#">Front Gate Tickets</a></li>
                     <li><a className="" href="#">TicketWeb</a></li>
-                    <li><a className="" href="#">universe</a></li>
-                    <li><a className="" href="#"></a>NFL</li>
-                    <li><a className="" href="#"></a>NBA</li>
-                    <li><a className="" href="#"></a>NHL</li>
+                    <li><a className="" href="#">Universe</a></li>
+                    <li><a className="" href="#">NFL</a></li>
+                    <li><a className="" href="#">NBA</a></li>
+                    <li><a className="" href="#">NHL</a></li>
                 </ul>
             </div>
             <div className="col-6 col-md">
