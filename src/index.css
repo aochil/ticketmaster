@@ -15,7 +15,7 @@
 #navbar{
     display: flex;
     width: 100%;
-    padding-left: 5%;
+    padding-left: 10%;
 }
 #wrapper,
 #pageBtns {
@@ -32,3 +32,9 @@
     text-decoration: none;
     padding: 0 10px 0 10px;
   }
+.divider{
+    width: 400px;
+}
+#navbar li{
+    margin-left: 25px;
+}
