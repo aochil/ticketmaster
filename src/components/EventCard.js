@@ -25,7 +25,13 @@ function EventCard(event) {
   const formatTime = moment(date).format("h:mm A");
   const venueName = event.event._embedded.venues[0].name;
   const city = event.event._embedded.venues[0].city.name;
-  const state = event.event._embedded.venues[0].country.name;
+  const country = event.event._embedded.venues[0].country.name;
+  let state;
+  if(country == "United States Of America"){
+    state = event.event._embedded.venues[0].state.stateCode;
+  } else {
+    state = "";
+  }
 
 
   return (
@@ -33,8 +39,8 @@ function EventCard(event) {
       <img className="card-img-top" src={imageUrl} alt="Card image cap" />
       <div className="card-body">
         <h5 className="card-title">{event.event.name}</h5>
-        <p className="card-text">{city+","}</p>
-        <p className="card-text">{state}</p>
+        <p className="card-text">{city+", " + state}</p>
+        <p className="card-text">{country}</p>
       </div>
       <ul className="list-group list-group-flush">
         <li className="list-group-item">{venueName}</li>
