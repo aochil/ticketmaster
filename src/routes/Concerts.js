@@ -1,12 +1,11 @@
 import React from 'react';
 
 
-function Concerts() {
+export default function Concerts() {
     return(
-        <main>
+        <div>
             <h2>Concert Tickets</h2>
-        </main>
+        </div>
     )
 }
 
-export default Concerts;
