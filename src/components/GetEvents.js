@@ -2,13 +2,15 @@ require("dotenv").config();
 import React, { useEffect, useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import { Container } from "react-bootstrap";
+import { useSearchParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EventCard from "./EventCard";
 
 function GetEvents() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [eventList, setEventList] = useState([]);
   const [activePage, setActivePage] = useState(0);
-  const [query, setQuery] = useState("Coachella");
+  const [query, setQuery] = useState(searchParams.get("query"));
   const [searchText, setSearchText] = useState("");
   const [error, setError] = useState(false);
 
@@ -17,6 +19,7 @@ function GetEvents() {
   const getEvents = () => {
     let updatedSearch = searchText.replace(/[\s,]/g, ","); //replace space between keywords with comma for api
     setQuery(updatedSearch);
+    setSearchParams('query='+searchText);
     setSearchText("");
   };
 
@@ -51,8 +54,9 @@ function GetEvents() {
   return (
     <div id="main" tabIndex={0} onKeyDown={handleKeyEnter}>
       <div id="wrapper">
-        <Input
+        <input
           id="search"
+          defaultValue={query}
           placeholder="Search..."
           onChange={(event) => setSearchText(event.target.value)}
         />
