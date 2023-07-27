@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import moment from "moment";
+import EventCard from "./EventCard";
 
-let page = 0;
 function GetEvents() {
   const [eventList, setEventList] = useState([]);
   const [activePage, setActivePage] = useState(0);
@@ -29,22 +28,28 @@ function GetEvents() {
       })
       .catch((err) => {
         console.log("Error", err);
-        setError(true);
-        alert("Search not found, please search again");
+        alert("Search not found");
       });
   }, [activePage, query]);
 
   const previousPage = () => {
-    if (!page == 0) {
-      page--;
+    console.log(eventList.length);
+    if (!activePage == 0) {
+      setActivePage(activePage - 1);
     }
   };
   const nextPage = () => {
-    page++;
+    if (eventList.length == 20) {
+      setActivePage(activePage + 1);
+    }
   };
-
+  const handleKeyEnter = (e) => {
+    if (e.key === "Enter") {
+      getEvents();
+    }
+  };
   return (
-    <div id="main">
+    <div id="main" tabIndex={0} onKeyDown={handleKeyEnter}>
       <div id="wrapper">
         <Input
           id="search"
@@ -52,6 +57,7 @@ function GetEvents() {
           onChange={(event) => setSearchText(event.target.value)}
         />
         <Button
+          type="button"
           id="searchBtn"
           content="Search"
           className="btn btn-outline-primary"
@@ -60,64 +66,9 @@ function GetEvents() {
           }}
         />
       </div>
-
       <Container id="container">
-        {console.log(eventList)}
-
         {eventList.map((eachEvent) => {
-          const images = eachEvent.images; //array of image objects
-          const imageSize = "4_3";
-          let imageUrl;
-          images.map((image) => {
-            //map through the array of images
-            if (image.ratio == imageSize) {
-              //if the image ratio is 4_3 then assign the url of this image to imageUrl
-              imageUrl = image.url;
-            }
-          });
-
-          const date = eachEvent.dates.start.dateTime;
-          const formatDate = moment(date).format("MMMM Do, YYYY"); //used moment to format date
-          const formatTime = moment(date).format("h:mm A");
-          const venueName = eachEvent._embedded.venues[0].name;
-          const city = eachEvent._embedded.venues[0].city.name;
-          const state = eachEvent._embedded.venues[0].state.stateCode;
-
-          return (
-            <div className="card" style={{ width: 18 + "rem" }}>
-              <img
-                className="card-img-top"
-                src={imageUrl}
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">{eachEvent.name}</h5>
-                <p className="card-text">{city + ", " + state}</p>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">{venueName}</li>
-                <li className="list-group-item">
-                  {formatDate + " at " + formatTime}
-                </li>
-              </ul>
-              <div className="card-body">
-                <a
-                  href={eachEvent.url}
-                  className="btn btn-info"
-                  role="button"
-                  target="_blank"
-                >
-                  {/* target blank to open ticket link in new tab*/}
-                  View Tickets
-                </a>
-              </div>
-            </div>
-
-            // <div>
-            //   {/* <span>{eachEvent.name}</span>
-            //   <img src={imageUrl}></img> */}
-            // </div>
-          );
+          return <EventCard event={eachEvent} />;
         })}
       </Container>
       <div id="pageBtns">
@@ -126,7 +77,6 @@ function GetEvents() {
           content="Back"
           onClick={() => {
             previousPage();
-            setActivePage(page);
           }}
         />
         <Button
@@ -134,7 +84,6 @@ function GetEvents() {
           content="Next"
           onClick={() => {
             nextPage();
-            setActivePage(page);
           }}
         />
       </div>
