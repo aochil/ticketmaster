@@ -25,7 +25,9 @@
     width: 100%;
 
 }
-
+.card-text{
+    margin-bottom: 0;
+}
 .row a{
     color: lightgrey;
     font-weight: 400;
