@@ -47,3 +47,7 @@ main{
 #navbar li{
     margin-left: 25px;
 }
+#loginForm{
+    margin: 0 30%;
+    width: auto;
+}
